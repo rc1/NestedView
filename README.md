@@ -8,5 +8,6 @@ An experiment for creating a NestedView with Backbone.js
 2. An experiment.
 3. Adds it self to `Backbone` if not being required using the module pattern.
 4. Subclasses need to call `Backbone.NestedView.prototype.set.call(this, options);`
-5. Not ready for production.
-6. An experiment.
+5. `activatedTransition` and `deactivatedTransition` are no-ops, see comments for jQuery usage.
+6. Not ready for production.
+7. An experiment.
