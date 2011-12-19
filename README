@@ -1,0 +1,12 @@
+# Backbone.NestedView.js
+
+An experiment for creating a NestedView with Backbone.js
+
+## Notes:
+
+1. Not ready for production.
+2. An experiment.
+3. Adds it self to `Backbone` if not being required using the module pattern.
+4. Subclasses need to call `Backbone.NestedView.prototype.set.call(this, options);`
+5. Not ready for production.
+6. An experiment.
