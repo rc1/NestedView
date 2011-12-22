@@ -1,21 +1,21 @@
 (function () {
 
-	// Initial Setup
-	// -------------
+    // Initial Setup
+    // -------------
 
-	// Save a reference to the global object.
-	var root = this;
+    // Save a reference to the global object.
+    var root = this;
 
-	// The top-level namespace. All public Backbone classes and modules will
-	// be attached to this. Exported for both CommonJS and the browser.
-	var Backbone;
-	if (typeof exports !== 'undefined') {
-		Backbone = exports;
-	} else {
-		Backbone = root.Backbone || Backbone;
-	}
+    // The top-level namespace. All public Backbone classes and modules will
+    // be attached to this. Exported for both CommonJS and the browser.
+    var Backbone;
+    if (typeof exports !== 'undefined') {
+        Backbone = exports;
+    } else {
+        Backbone = root.Backbone || Backbone;
+    }
 
-	Backbone.NestedView = Backbone.View.extend({
+    Backbone.NestedView = Backbone.View.extend({
 
         initialize  :   function (options) {
 
@@ -45,10 +45,27 @@
             this.children = [];
             this.parent = undefined;
             this._isActive = true;
+            this._canRenderAll = true; // allow kicking or of render recursion
         },
 
         render      :   function () {
             return this;
+        },
+
+        renderAll : function () {
+            if (this.canRenderAll) {
+                 _(this.children).each(function (child, index) {
+                    child.renderAll();
+                });
+            }
+            return this.render();
+        },
+
+        canRenderAll : function (yN) {
+            if (arguments.length > 0) {
+                if (yN != this._canRenderAll) { this._canRenderAll = yN };
+            }
+            return this._canRenderAll;
         },
 
         childByCID : function (cid) {
